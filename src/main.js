@@ -74,7 +74,6 @@ function create()
         repeat: -1
     });   
     
-    this.physics.add.collider(player, platforms);
     cursors = this.input.keyboard.createCursorKeys();
 
 
@@ -87,12 +86,13 @@ function create()
     axos.children.iterate(function (child) {
         
         child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+
     });
 
+    this.physics.add.collider(player, platforms);
     this.physics.add.collider(axolotl, platforms);
-    this.physics.add.overlap(player, axolotl, collectStar, null, this);
-
-
+    
+    this.physics.add.overlap(player, axolotl, collectAxo, null, this);
 
 
 }
@@ -125,4 +125,9 @@ if (cursors.up.isDown && player.body.touching.down)
     player.setVelocityY(-330);
 }
 
+}
+
+function collectAxo(player, axolotl)
+{
+    star.disableBody(true,true);
 }
