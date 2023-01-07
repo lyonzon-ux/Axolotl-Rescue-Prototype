@@ -22,6 +22,7 @@ var config = {
 function preload()
 {
     this.load.image('ocean', 'assets/Ocean.png');
+    this.load.image('axolotl', 'assets/axo.png');
     this.load.image('bubble', 'assets/bubbleplats.png');
     this.load.spritesheet('friend', 
     'assets/octo.png',
@@ -31,6 +32,8 @@ function preload()
 
 var platforms;
 var player;
+
+
 function create()
 {
     //background
@@ -73,6 +76,23 @@ function create()
     
     this.physics.add.collider(player, platforms);
     cursors = this.input.keyboard.createCursorKeys();
+
+
+    axos= this.physics.add.group({
+        key:'axolotl',
+        repeat: 15,
+        setXY: {x:12, y: 0, stepX: 70}
+    });
+
+    axos.children.iterate(function (child) {
+        
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+
+    this.physics.add.collider(axolotl, platforms);
+    this.physics.add.overlap(player, axolotl, collectStar, null, this);
+
+
 
 
 }
