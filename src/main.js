@@ -54,7 +54,6 @@ function create()
 
     //player
     player = this.physics.add.sprite(100, 450, 'friend');
-
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
     
@@ -114,6 +113,7 @@ function update()
     if (cursors.left.isDown)
 {
     player.setVelocityX(-160);
+    console.log("Wowowowow")
 
     player.anims.play('left', true);
 }
